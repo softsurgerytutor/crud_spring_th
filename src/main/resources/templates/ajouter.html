@@ -2,18 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ajouter</title>
 </head>
 <body>
-    <h1>Ajouter Employe</h1>
-    <form action="#" th:action="@{/save}" th:object="${employe}" method="post">
-        <label for="nom">Nom:</label>
-        <input type="text" id="nom" th:field="*{nom}" required><br>
-        <label for="prenom">Prenom:</label>
-        <input type="text" id="prenom" th:field="*{prenom}" required><br>
-        <label for="fonction">Fonction:</label>
-        <input type="text" id="fonction" th:field="*{fonction}" required><br>
-        <button type="submit">Ajouter Employe</button>
-    </form>
+<h1>Ajouter Employe</h1>
+<form action="#" th:action="@{/save}" th:object="${employe}" method="post">
+    <fieldset>
+        <legend>Ajouter Employe</legend>
+        <table>
+            <tr>
+                <td><label for="nom">Nom:</label></td>
+                <td><input type="text" id="nom" th:field="*{nom}" required></td>
+            </tr>
+            <tr>
+                <td><label for="prenom">Prenom:</label></td>
+                <td><input type="text" id="prenom" th:field="*{prenom}" required></td>
+            </tr>
+            <tr>
+                <td><label for="fonction">Fonction:</label></td>
+                <td><input type="text" id="fonction" th:field="*{fonction}" required></td>
+            </tr>
+            <tr style="text-align: center">
+                <td>
+                    <button type="submit">Ajouter</button>
+                </td>
+                <td>
+                    <button type="reset">Annuler</button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+<a href="/">Retour a la page d'accueil</a>
 </body>
 </html>

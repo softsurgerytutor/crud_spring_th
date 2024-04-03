@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier</title>
+</head>
+<body>
+<h1>Ajouter Employe</h1>
+<form action="#" th:action="@{/edit}" th:object="${employe}" method="post">
+    <fieldset>
+        <legend>Modifier Employe</legend>
+        <table>
+            <tr>
+                <td><label for="nom">Id:</label></td>
+                <td><input type="text" id="id" th:field="*{id}" th:value="*{id}" required></td>
+            </tr>
+            <tr>
+                <td><label for="nom">Nom:</label></td>
+                <td><input type="text" id="nom" th:field="*{nom}" th:value="*{nom}"  required></td>
+            </tr>
+            <tr>
+                <td><label for="prenom">Prenom:</label></td>
+                <td><input type="text" id="prenom" th:field="*{prenom}" th:value="*{prenom}"  required></td>
+            </tr>
+            <tr>
+                <td><label for="fonction">Fonction:</label></td>
+                <td><input type="text" id="fonction" th:field="*{fonction}" th:value="*{fonction}"  required></td>
+            </tr>
+            <tr style="text-align: center">
+                <td>
+                    <button type="submit">Modifier</button>
+                </td>
+                <td>
+                    <button type="reset">Annuler</button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+<a href="/">Retour a la page d'accueil</a>
+</body>
+</html>
