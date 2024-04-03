@@ -1,22 +1,23 @@
 package com.crudexample.crud.controller;
 
 import com.crudexample.crud.model.Employe;
+import com.crudexample.crud.service.Impl.EmployeServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class EmployeController {
-    List<Employe> employes = seed();
+
+    EmployeServiceImpl employeService = new EmployeServiceImpl();
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("employes", employes);
+        model.addAttribute("employes", employeService.getAll());
         return "index";
     }
 
@@ -27,18 +28,31 @@ public class EmployeController {
     }
 
     @PostMapping("/save")
-    public String saveProduct(@ModelAttribute("employe") Employe employe) {
-        employe.setId(employes.size() + 1);
-        employes.add(employe);
+    public String save(@ModelAttribute("employe") Employe employe) {
+        employeService.add(employe);
         return "redirect:/";
     }
 
-    private List<Employe> seed() {
-        List<Employe> employes = new ArrayList<>();
-        employes.add(new Employe(1, "Employe", "1", "Eugenie"));
-        employes.add(new Employe(2, "Employe", "2", "Technician"));
-        return employes;
+    @GetMapping("/modifier/{id}")
+    public String modifier(Model model, @PathVariable int id){
+        Employe employe = employeService.getOne(id);
+        model.addAttribute("employe", employe);
+        return "modifier";
     }
+
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute("employe") Employe employe){
+        employeService.modify(employe);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id) {
+        employeService.delete(new Employe(id));
+        return "redirect:/";
+    }
+
+
 
 
 }
